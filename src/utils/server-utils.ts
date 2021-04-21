@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { xml2js } from 'xml-js';
-import { get, isEmpty, isString, merge, union } from 'lodash';
+import { findIndex, get, isEmpty, isString, merge, union } from 'lodash';
 
 import { appConfig } from '../config';
 import { LayerDefinitions } from '../config/utils';
@@ -60,8 +60,19 @@ function formatCapabilitiesInfo(
 ): AvailableDates {
   return rawLayers.reduce((acc: any, layer: any) => {
     const layerId = get(layer, layerIdPath);
-    const rawDates = get(layer, datesPath, []);
 
+    const innerDatesPath =
+      'Dimension' in layer && datesPath === 'Dimension._text'
+        ? (() => {
+            // case for multi dimension layer
+            const idx = findIndex(get(layer, 'Dimension'), dim => {
+              return get(dim, '_attributes.name') === 'time';
+            });
+            return idx >= 0 ? `Dimension.${idx}._text` : datesPath;
+          })()
+        : datesPath;
+
+    const rawDates = get(layer, innerDatesPath, []);
     const dates: (string | { _text: string })[] = isString(rawDates)
       ? rawDates.split(',')
       : rawDates;

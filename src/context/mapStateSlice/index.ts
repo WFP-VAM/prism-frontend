@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Map as MapBoxMap } from 'mapbox-gl';
-import { LayerType } from '../../config/types';
+import { LayerForm, LayerKey, LayerType } from '../../config/types';
 import { LayerDefinitions } from '../../config/utils';
 import { LayerData, LayerDataTypes, loadLayerData } from '../layers/layer-data';
 
@@ -16,6 +16,7 @@ export type MapState = {
   loading: number;
   errors: string[];
   layersData: LayerData<any>[];
+  layerForms: LayerForm[];
 };
 
 // MapboxGL's map type contains some kind of cyclic dependency that causes an infinite loop in immers's change
@@ -31,6 +32,13 @@ const initialState: MapState = {
   loading: 0,
   errors: [],
   layersData: [],
+  layerForms: [],
+};
+
+export type FormInputChange = {
+  layerId: LayerKey;
+  inputId: string;
+  value: string;
 };
 
 function keepLayer(layer: LayerType, payload: LayerType) {
@@ -42,7 +50,15 @@ export const mapStateSlice = createSlice({
   name: 'mapState',
   initialState,
   reducers: {
-    addLayer: ({ layers, ...rest }, { payload }: PayloadAction<LayerType>) => {
+    addLayer: (
+      { layers, layerForms, ...rest },
+      { payload }: PayloadAction<LayerType>,
+    ) => {
+      const layerForm =
+        'formInputs' in payload
+          ? { id: payload.id, inputs: payload.formInputs! }
+          : null;
+
       // Check if a layer belongs to a group.
       if (!payload.group) {
         return {
@@ -50,6 +66,7 @@ export const mapStateSlice = createSlice({
           layers: layers
             .filter(layer => keepLayer(layer, payload))
             .concat(payload),
+          layerForms: layerForms.concat(layerForm ? [layerForm] : []),
         };
       }
 
@@ -64,6 +81,7 @@ export const mapStateSlice = createSlice({
         layers: layers
           .filter(layer => keepLayer(layer, payload))
           .concat(groupedLayer),
+        layerForms: layerForms.concat(layerForm ? [layerForm] : []),
       };
     },
 
@@ -77,6 +95,25 @@ export const mapStateSlice = createSlice({
         payload.group
           ? !group || group?.name !== payload.group.name
           : id !== payload.id,
+      ),
+    }),
+
+    setFormInputValue: (
+      { layerForms, ...rest },
+      { payload }: PayloadAction<FormInputChange>,
+    ) => ({
+      ...rest,
+      layerForms: layerForms.map(layerForm =>
+        layerForm.id === payload.layerId
+          ? {
+              id: layerForm.id,
+              inputs: layerForm.inputs.map(({ id, value, ...restInput }) => ({
+                id,
+                value: id === payload.inputId ? payload.value : value,
+                ...restInput,
+              })),
+            }
+          : layerForm,
       ),
     }),
 
@@ -133,6 +170,7 @@ export const mapStateSlice = createSlice({
 export const {
   addLayer,
   removeLayer,
+  setFormInputValue,
   updateDateRange,
   setMap,
 } = mapStateSlice.actions;

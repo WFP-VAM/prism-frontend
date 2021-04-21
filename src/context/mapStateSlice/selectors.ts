@@ -5,7 +5,7 @@ import { Map as MapBoxMap } from 'mapbox-gl';
 import type { RootState } from '../store';
 import type { LayerDataTypes } from '../layers/layer-data';
 import type { MapState } from '.';
-import type { LayerKey } from '../../config/types';
+import type { LayerKey, LayerForm } from '../../config/types';
 
 export const layersSelector = (state: RootState): MapState['layers'] =>
   state.mapState.layers;
@@ -21,5 +21,10 @@ export const layerDataSelector = (id: LayerKey, date?: number) => (
     ({ layer, date: dataDate }) =>
       layer.id === id && (!date || date === dataDate),
   );
+
+export const layerFormSelector = (id: LayerKey | undefined) => (
+  state: RootState,
+): LayerForm | undefined => state.mapState.layerForms.find(e => e.id === id);
+
 export const isLoading = (state: RootState): boolean =>
   state.mapState.loading > 0;

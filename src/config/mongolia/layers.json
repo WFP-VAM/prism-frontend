@@ -309,6 +309,58 @@
       "pixelResolution": 64,
       "offset": -200
     },
+    "form_inputs": [
+      {
+        "id": "DIM_NUMDAYSOURCE",
+        "label": "Number of days",
+        "value": "5days",
+        "values": [
+          {
+            "value": "1days",
+            "label": "1 Day"
+          },
+          {
+            "value": "2days",
+            "label": "2 Days"
+          },
+          {
+            "value": "3days",
+            "label": "3 Days"
+          },
+          {
+            "value": "4days",
+            "label": "4 Days"
+          },
+          {
+            "value": "5days",
+            "label": "5 Days"
+          }
+        ]
+      },
+      {
+        "id": "DIM_HOURSOURCE",
+        "label": "Release Hour",
+        "value": "H00",
+        "values": [
+          {
+            "value": "H00",
+            "label": "00:00"
+          },
+          {
+            "value": "H06",
+            "label": "06:00"
+          },
+          {
+            "value": "H12",
+            "label": "12:00"
+          },
+          {
+            "value": "H18",
+            "label": "18:00"
+          }
+        ]
+      }
+    ],
     "legend": [
       {
         "value": "-80%",

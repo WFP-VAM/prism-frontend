@@ -184,6 +184,9 @@ export class WMSLayerProps extends CommonLayerProps {
   additionalQueryParams?: { [key: string]: string };
 
   @optional
+  formInputs?: LayerFormInput[];
+
+  @optional
   wcsConfig?: RawDataConfiguration;
 }
 
@@ -210,6 +213,21 @@ export class NSOLayerProps extends CommonLayerProps {
   dataField: string;
 }
 
+export class LayerForm {
+  id: LayerKey;
+  inputs: LayerFormInput[];
+}
+export class LayerFormInput {
+  id: LayerKey;
+  label: string;
+  value: string;
+  values: [
+    {
+      label: string;
+      value: string;
+    },
+  ];
+}
 export class StatsApi {
   url: string;
   zonesUrl: string;
