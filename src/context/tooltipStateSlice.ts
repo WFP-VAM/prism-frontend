@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { merge } from 'lodash';
 import type { RootState } from './store';
 
@@ -6,11 +6,23 @@ export interface PopupData {
   [key: string]: { data: number; coordinates: GeoJSON.Position };
 }
 
+export interface PopupComponentSpec {
+  type: string;
+  key: number;
+  params: { [key: string]: any };
+}
+
+export interface PopupRemoteData {
+  components: Array<PopupComponentSpec>;
+}
+
 export interface MapTooltipState {
   coordinates?: GeoJSON.Position;
   locationName: string;
   data: PopupData;
+  remoteData: PopupRemoteData | null;
   showing: boolean;
+  loading: boolean;
 }
 
 type ShowPopupType = {
@@ -21,8 +33,21 @@ type ShowPopupType = {
 const initialState: MapTooltipState = {
   locationName: '',
   data: {},
+  remoteData: null,
   showing: false,
+  loading: false,
 };
+
+export const fetchPopupData = createAsyncThunk(
+  'tooltipState/fetchPopupData',
+  async (url: string) => {
+    return (
+      await fetch(url, {
+        mode: url.includes('http') ? 'cors' : 'same-origin',
+      })
+    ).json();
+  },
+);
 
 export const tooltipStateSlice = createSlice({
   name: 'tooltipState',
@@ -39,6 +64,11 @@ export const tooltipStateSlice = createSlice({
     setPopupData: (state, { payload }: PayloadAction<PopupData>) => ({
       ...state,
       data: payload,
+    }),
+
+    clearRemotePopupData: state => ({
+      ...state,
+      remoteData: null,
     }),
 
     setPopupShowing: (state, { payload }: PayloadAction<boolean>) => ({
@@ -67,6 +97,25 @@ export const tooltipStateSlice = createSlice({
       coordinates: payload,
     }),
   },
+  extraReducers: builder => {
+    builder.addCase(fetchPopupData.fulfilled, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      remoteData: payload,
+    }));
+
+    builder.addCase(fetchPopupData.pending, state => ({
+      ...state,
+      remoteData: null,
+      loading: true,
+    }));
+
+    builder.addCase(fetchPopupData.rejected, state => ({
+      ...state,
+      remoteData: null,
+      loading: false,
+    }));
+  },
 });
 
 // Getters
@@ -80,6 +129,7 @@ export const tooltipShowingSelector = (
 export const {
   addPopupData,
   setPopupData,
+  clearRemotePopupData,
   setPopupShowing,
   hidePopup,
   showPopup,

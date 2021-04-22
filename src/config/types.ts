@@ -156,6 +156,9 @@ export class CommonLayerProps {
 
   @optional // only optional for boundary layer
   group?: GroupDefinition;
+
+  @optional
+  popupUrl?: string;
 }
 
 export class BoundaryLayerProps extends CommonLayerProps {

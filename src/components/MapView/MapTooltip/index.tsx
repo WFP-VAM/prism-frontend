@@ -1,8 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Popup } from 'react-mapbox-gl';
-import { createStyles, withStyles, WithStyles } from '@material-ui/core';
+import {
+  CircularProgress,
+  createStyles,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core';
 import { tooltipSelector } from '../../../context/tooltipStateSlice';
+import TooltipComponents from './Components/index';
 
 function MapTooltip({ classes }: TooltipProps) {
   const popup = useSelector(tooltipSelector);
@@ -14,13 +20,16 @@ function MapTooltip({ classes }: TooltipProps) {
       className={classes.popup}
     >
       <h4>{popup.locationName}</h4>
-      {Object.entries(popup.data)
-        .filter(([, value]) => value.coordinates === popup.coordinates)
-        .map(([key, value]) => (
-          <h4 key={key}>
-            {key}: {value.data}
-          </h4>
-        ))}
+      {popup.loading ? <CircularProgress /> : null}
+      {popup.remoteData
+        ? popup.remoteData.components.map(TooltipComponents)
+        : Object.entries(popup.data)
+            .filter(([, value]) => value.coordinates === popup.coordinates)
+            .map(([key, value]) => (
+              <h4 key={key}>
+                {key}: {value.data}
+              </h4>
+            ))}
     </Popup>
   ) : null;
 }

@@ -58,7 +58,6 @@ export const mapStateSlice = createSlice({
       const groupedLayer = Object.values(LayerDefinitions).filter(
         l => l.group?.name === name,
       );
-
       return {
         ...rest,
         layers: layers

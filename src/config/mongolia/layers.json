@@ -300,6 +300,7 @@
     "type": "wms",
     "server_layer_name": "ModisAnomaly",
     "base_url": "https://mongolia.sibelius-datacube.org:5000",
+    "popup_url": "../data/mongolia/sample_popup.json",
     "date_interval": "days",
     "opacity": 0.5,
     "legend_text": "Compares the current pasture conditions to the long term average to calculate pasture anomaly",
