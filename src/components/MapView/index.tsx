@@ -88,9 +88,12 @@ function MapView({ classes }: MapViewProps) {
   const { startDate: selectedDate } = useSelector(dateRangeSelector);
   const serverAvailableDates = useSelector(availableDatesSelector);
   const selectedLayersWithDateSupport = selectedLayers
-    .filter((layer): layer is DateCompatibleLayer =>
-      dateSupportLayerTypes.includes(layer.type),
-    )
+    .filter((layer): layer is DateCompatibleLayer => {
+      if (layer.type === 'nso') {
+        return Boolean(layer.dateUrl);
+      }
+      return dateSupportLayerTypes.includes(layer.type);
+    })
     .filter(layer => !layer.group || layer.group.main === true);
 
   useEffect(() => {

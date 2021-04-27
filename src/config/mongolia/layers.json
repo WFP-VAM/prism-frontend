@@ -10,7 +10,8 @@
   "population_below_poverty": {
     "title": "Poverty headcount (aimag)",
     "type": "nso",
-    "path": "../data/mongolia/nso/NSO_Poverty_Headcount_Admin1.json",
+    "path": "../data/mongolia/nso/NSO_Poverty_Headcount_Admin1.json?date={YYYY-MM-DD}",
+    "date_url": "../data/mongolia/nso/nso_sample_dates.json",
     "data_field": "DTVAL_CO",
     "admin_level": 1,
     "admin_code": "CODE1",

@@ -11,9 +11,11 @@ import {
 } from '../../../../context/layers/layer-data';
 import { layerDataSelector } from '../../../../context/mapStateSlice/selectors';
 import { addPopupData } from '../../../../context/tooltipStateSlice';
+import { useDefaultDate } from '../../../../utils/useDefaultDate';
 
 function NSOLayers({ layer }: { layer: NSOLayerProps }) {
-  const layerData = useSelector(layerDataSelector(layer.id)) as
+  const date = useDefaultDate(layer.id);
+  const layerData = useSelector(layerDataSelector(layer.id, date)) as
     | LayerData<NSOLayerProps>
     | undefined;
   const dispatch = useDispatch();
@@ -23,9 +25,9 @@ function NSOLayers({ layer }: { layer: NSOLayerProps }) {
 
   useEffect(() => {
     if (!features) {
-      dispatch(loadLayerData({ layer }));
+      dispatch(loadLayerData({ layer, date }));
     }
-  }, [dispatch, features, layer]);
+  }, [dispatch, features, layer, date]);
 
   if (!features) {
     return null;

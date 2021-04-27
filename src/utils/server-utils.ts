@@ -4,7 +4,11 @@ import { get, isEmpty, isString, merge, union } from 'lodash';
 
 import { appConfig } from '../config';
 import { LayerDefinitions } from '../config/utils';
-import type { AvailableDates, PointDataLayerProps } from '../config/types';
+import type {
+  AvailableDates,
+  NSOLayerProps,
+  PointDataLayerProps,
+} from '../config/types';
 import { ImpactLayerProps, WMSLayerProps } from '../config/types';
 
 // Note: PRISM's date picker is designed to work with dates in the UTC timezone
@@ -18,6 +22,7 @@ const xml2jsOptions = {
 export type DateCompatibleLayer =
   | WMSLayerProps
   | ImpactLayerProps
+  | NSOLayerProps
   | PointDataLayerProps;
 export const getPossibleDatesForLayer = (
   layer: DateCompatibleLayer,
@@ -32,6 +37,7 @@ export const getPossibleDatesForLayer = (
       return serverAvailableDates[
         (LayerDefinitions[layer.hazardLayer] as WMSLayerProps).serverLayerName
       ];
+    case 'nso':
     case 'point_data':
       return serverAvailableDates[layer.id];
   }
@@ -225,6 +231,24 @@ async function getPointDataCoverage(layer: PointDataLayerProps) {
   return possibleDates;
 }
 
+async function getNSOCoverage(layer: NSOLayerProps) {
+  const url = layer.dateUrl;
+  if (!url) {
+    return [];
+  }
+  try {
+    // raw data comes in as {"dates": ["YYYY-MM-DD"]}
+    const { dates }: { dates: string[] } = await fetch(url, {
+      mode: url.startsWith('http') ? 'cors' : 'same-origin',
+    }).then(resp => resp.json());
+    return dates.map(v => moment(v, 'YYYY-MM-DD').valueOf());
+  } catch (error) {
+    // TODO we used to throw the error here so a notification appears. Removed because a failure of one shouldn't prevent the successful requests from saving.
+    console.error(error);
+    return [];
+  }
+}
+
 /**
  * Load available dates for WMS and WCS using a serverUri defined in prism.json and for GeoJSONs (point data) using their API endpoint.
  *
@@ -238,11 +262,19 @@ export async function getLayersAvailableDates(): Promise<AvailableDates> {
     (layer): layer is PointDataLayerProps => layer.type === 'point_data',
   );
 
+  const nsoWithDateLayers = Object.values(LayerDefinitions).filter(
+    (layer): layer is NSOLayerProps =>
+      layer.type === 'nso' && Boolean(layer.dateUrl),
+  );
+
   const layerDates: AvailableDates[] = await Promise.all([
     ...wmsServerUrls.map(url => getWMSCapabilities(url)),
     ...wcsServerUrls.map(url => getWCSCoverage(url)),
     ...pointDataLayers.map(async layer => ({
       [layer.id]: await getPointDataCoverage(layer),
+    })),
+    ...nsoWithDateLayers.map(async layer => ({
+      [layer.id]: await getNSOCoverage(layer),
     })),
   ]);
 
