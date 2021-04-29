@@ -309,6 +309,16 @@
       "pixelResolution": 64,
       "offset": -200
     },
+    "downloads": [
+      {
+        "label": "GeoTiff",
+        "url": "https://example.com/download?layer=poverty&format=tiff"
+      },
+      {
+        "label": "CSV",
+        "url": "https://example.com/download?layer=poverty&format=csv"
+      }
+    ],
     "legend": [
       {
         "value": "-80%",

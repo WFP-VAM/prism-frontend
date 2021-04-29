@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import moment from 'moment';
 import {
   Button,
   createStyles,
@@ -17,10 +18,24 @@ import {
   withStyles,
 } from '@material-ui/core';
 import Menu, { MenuProps } from '@material-ui/core/Menu';
-import { CloudDownload, ArrowDropDown, Image } from '@material-ui/icons';
+import {
+  CloudDownload,
+  ArrowDropDown,
+  Image,
+  Description,
+} from '@material-ui/icons';
 import { jsPDF } from 'jspdf';
 import { useSelector } from 'react-redux';
-import { mapSelector } from '../../../context/mapStateSlice/selectors';
+import {
+  mapSelector,
+  layersSelector,
+  dateRangeSelector,
+} from '../../../context/mapStateSlice/selectors';
+
+type ExtraDownloadRequest = {
+  url: string;
+  date: number | undefined;
+};
 
 const ExportMenu = withStyles((theme: Theme) => ({
   paper: {
@@ -106,6 +121,24 @@ function Download({ classes }: DownloadProps) {
     }
   };
 
+  function downloadExtra(request: ExtraDownloadRequest) {
+    const url = new URL(request.url);
+    if (request.date) {
+      url.searchParams.append(
+        'date',
+        moment(request.date).format('YYYY-MM-DD'),
+      );
+    }
+    window.open(url.toString());
+  }
+
+  const layers = useSelector(layersSelector);
+  // first layer is always boundary layer
+  const lastLayer = layers.length > 1 ? layers[layers.length - 1] : null;
+  const extraDownloads =
+    lastLayer && lastLayer.downloads ? lastLayer.downloads : [];
+  const selectedDate = useSelector(dateRangeSelector);
+
   return (
     <Grid item>
       <Button variant="contained" color="primary" onClick={handleClick}>
@@ -130,6 +163,22 @@ function Download({ classes }: DownloadProps) {
           </ListItemIcon>
           <ListItemText primary="IMAGE" />
         </ExportMenuItem>
+        {extraDownloads.map(ed => (
+          <ExportMenuItem
+            key={ed.label}
+            onClick={() => {
+              downloadExtra({
+                date: selectedDate.startDate,
+                url: ed.url,
+              });
+            }}
+          >
+            <ListItemIcon>
+              <Description fontSize="small" style={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary={ed.label} />
+          </ExportMenuItem>
+        ))}
       </ExportMenu>
       <Dialog
         maxWidth="xl"
