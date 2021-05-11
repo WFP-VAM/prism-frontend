@@ -14,16 +14,16 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
         
-        - run: yarn install
+        - run: cd web && yarn install
     
         - save_cache:
             paths:
             - node_modules
             key: v1-dependencies-{{ checksum "package.json" }}
         
-        - run: yarn test
-        - run: yarn lint
-        - run: yarn build
+        - run: cd web && yarn test
+        - run: cd web && yarn lint
+        - run: cd web && yarn build
 
   build_api:
     machine:

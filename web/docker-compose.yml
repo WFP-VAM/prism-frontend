@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  web:
+    tty: true
+    stdin_open: true
+    restart: always
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: prism_web:latest
+    container_name: prism_web
+    env_file:
+        - .env
+    volumes:
+      - '.:/home/app'
+    ports:
+      - ${PORT}:${PORT}
+    command: yarn start

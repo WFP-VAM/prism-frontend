@@ -31,3 +31,4 @@ yarn-error.log*
 # Editors
 .vscode/
 .idea/
+/.log/
