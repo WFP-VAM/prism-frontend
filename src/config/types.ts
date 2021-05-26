@@ -235,6 +235,14 @@ export enum AggregationOperations {
   Median = 'median',
 }
 
+export const isStatistic = (stat?: string): stat is AggregationOperations => {
+  return stat
+    ? Object.values(AggregationOperations).includes(
+        stat as AggregationOperations,
+      )
+    : false;
+};
+
 export type ThresholdDefinition = { below?: number; above?: number };
 
 export class ImpactLayerProps extends CommonLayerProps {
@@ -341,6 +349,12 @@ export class TableType {
   @optional
   chart?: ChartConfig;
 }
+
+export type ActionMap<M extends { [index: string]: any }> = {
+  [Key in keyof M]: M[Key] extends undefined
+    ? { type: Key }
+    : { type: Key; payload: M[Key] };
+};
 
 // used for timeline items in date selector
 export type DateRangeType = {

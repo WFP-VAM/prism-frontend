@@ -9,6 +9,8 @@ import React, { ReactElement } from 'react';
 import { menuList } from '../../NavBar/utils';
 import { LayerKey, LayerType } from '../../../config/types';
 
+const defaultValue = 'placeholder';
+
 function LayerDropdown({
   type,
   value,
@@ -29,12 +31,12 @@ function LayerDropdown({
     }))
     // 3. filter categories which don't have any layers at the end of it all.
     .filter(category => category.layers.length > 0);
-  const defaultValue = 'placeholder';
 
   return (
     <FormControl {...rest}>
       <Select
         defaultValue={defaultValue}
+        value={value || defaultValue}
         onChange={e => {
           setValue(e.target.value as LayerKey);
         }}
@@ -66,8 +68,8 @@ function LayerDropdown({
             ? [
                 <MenuItem
                   style={{ color: 'black' }}
-                  key="placeholder"
-                  value="placeholder"
+                  key={defaultValue}
+                  value={defaultValue}
                   disabled
                 >
                   {placeholder}

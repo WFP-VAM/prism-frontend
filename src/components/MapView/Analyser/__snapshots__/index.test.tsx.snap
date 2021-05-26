@@ -196,7 +196,6 @@ exports[`renders as expected 1`] = `
               id="filled-number"
               label="Min"
               type="number"
-              value=""
               variant="filled"
             />
             <mock-textfield
@@ -204,7 +203,6 @@ exports[`renders as expected 1`] = `
               id="filled-number"
               label="Max"
               type="number"
-              value=""
               variant="filled"
             />
           </div>
