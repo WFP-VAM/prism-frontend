@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { Feature, MultiPolygon, point } from '@turf/helpers';
 import bbox from '@turf/bbox';
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
@@ -155,6 +156,7 @@ export function WCSRequestUrl(
   layer: WMSLayerProps,
   date: string | undefined,
   extent: Extent,
+  resolution: number | undefined,
   maxPixels = 5096,
 ) {
   const { baseUrl, serverLayerName, wcsConfig } = layer;
@@ -170,14 +172,18 @@ export function WCSRequestUrl(
     return getWCSv2Url(layer, date, extent);
   }
 
-  const resolution = wcsConfig?.pixelResolution || 256;
+  const pixelResolution = resolution || wcsConfig?.pixelResolution || 256;
 
   // Get our image width & height at either the desired resolution or a down-sampled resolution if the resulting
   // dimensions would exceed our `maxPixels` in height or width
   const xRange = maxX - minX;
   const yRange = maxY - minY;
 
-  const maxDim = Math.min(maxPixels, xRange * resolution, yRange * resolution);
+  const maxDim = Math.min(
+    maxPixels,
+    xRange * pixelResolution,
+    yRange * pixelResolution,
+  );
   const scale = maxDim / Math.max(xRange, yRange);
 
   const width = Math.ceil(xRange * scale);
@@ -192,6 +198,46 @@ export function WCSRequestUrl(
     width,
     height,
   );
+}
+
+export function getWFSUrl(
+  baseUrl: string,
+  layerName: string,
+  override: { [key: string]: string } = {},
+) {
+  const params = {
+    service: 'WFS',
+    version: '1.0.0',
+    request: 'GetFeature',
+    typeName: `prism:${layerName}`,
+    outputFormat: 'application/json',
+    ...override,
+  };
+
+  return formatUrl(`${baseUrl}/prism/ows`, params);
+}
+
+export function WFSRequestUrl(
+  layer: WMSLayerProps,
+  date: string | undefined,
+  extent: Extent,
+  override: { [key: string]: string } = {},
+) {
+  const { baseUrl, serverLayerName } = layer;
+
+  // Precisely set start and end of the day
+  const startOfToday = moment(new Date(`${date}T00:00:00Z`)).toISOString();
+  const endOfToday = moment(new Date(`${date}T23:59:59Z`)).toISOString();
+
+  // WFS query doesn't allow to filter by  both `date` and `bbox`
+  // they are mutual exclusive
+  const filter =
+    date !== undefined
+      ? `&cql_filter=timestamp+between+${startOfToday}+and+${endOfToday}`
+      : `&cql_filter=bbox=${extent.join()}`;
+
+  const baseURI = getWFSUrl(baseUrl, serverLayerName, override);
+  return `${baseURI}&sortBy=timestamp+D${filter}`;
 }
 
 /**

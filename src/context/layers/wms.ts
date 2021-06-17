@@ -7,6 +7,7 @@ import {
   Rasters,
   TransformMatrix,
   WCSRequestUrl,
+  WFSRequestUrl,
 } from '../../components/MapView/Layers/raster-utils';
 
 export type WMSLayerData = {
@@ -19,6 +20,7 @@ export function getWCSLayerUrl({
   layer,
   extent,
   date,
+  ...override
 }: LayerDataParams<WMSLayerProps>) {
   if (!extent) {
     throw new Error(
@@ -26,10 +28,36 @@ export function getWCSLayerUrl({
     );
   }
 
+  const resolution = override?.resolution;
+  const maxPixel = override?.maxPixel;
+
   return WCSRequestUrl(
     layer,
     date ? moment(date).format('YYYY-MM-DD') : undefined,
     extent,
+    resolution,
+    maxPixel,
+  );
+}
+
+/* eslint-disable camelcase */
+export function getWFSLayerUrl({
+  layer,
+  extent,
+  date,
+  override,
+}: LayerDataParams<WMSLayerProps>) {
+  if (!extent) {
+    throw new Error(
+      `Can't fetch WFS data for layer ${layer.id} without providing an extent!`,
+    );
+  }
+
+  return WFSRequestUrl(
+    layer,
+    date ? moment(date).format('YYYY-MM-DD') : undefined,
+    extent,
+    override,
   );
 }
 

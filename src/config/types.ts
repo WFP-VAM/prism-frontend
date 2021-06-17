@@ -355,7 +355,6 @@ export interface WfsRequestParams {
   time?: string;
 }
 /* eslint-enable camelcase */
-
 export interface ChartConfig {
   type: string;
   category: string;

@@ -16,23 +16,26 @@ import {
   LinearProgress,
 } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { Extent } from '../Layers/raster-utils';
 import {
   mapSelector,
+  layerDataSelector,
   dateRangeSelector,
 } from '../../../context/mapStateSlice/selectors';
 import ColorIndicator from './ColorIndicator';
 import {
   LayerType,
-  AggregationOperations,
   NSOLayerProps,
+  ImpactLayerProps,
+  PointDataLayerProps,
+  AggregationOperations,
   WMSLayerProps,
   LayerKey,
   GeometryType,
 } from '../../../config/types';
 import { formatWMSLegendUrl } from '../../../utils/server-utils';
+import { getWCSLayerUrl, getWFSLayerUrl } from '../../../context/layers/wms';
+import { downloadToFile } from '../utils';
 import {
   analysisResultSelector,
   isAnalysisLayerActiveSelector,
@@ -41,7 +44,8 @@ import {
   isExposureAnalysisLoadingSelector,
   clearAnalysisResult,
 } from '../../../context/analysisResultStateSlice';
-
+import { Extent } from '../Layers/raster-utils';
+import { LayerData } from '../../../context/layers/layer-data';
 import { LayerDefinitions } from '../../../config/utils';
 
 /**
@@ -89,6 +93,7 @@ function Legends({ classes, layers, extent }: LegendsProps) {
           opacity={layer.opacity}
           exposure={exposure}
           extent={extent}
+          layer={layer}
         >
           {layer.legendText}
         </LegendItem>
@@ -105,6 +110,7 @@ function Legends({ classes, layers, extent }: LegendsProps) {
             }`}
             classes={classes}
             opacity={0.5} // TODO: initial opacity value
+            layer={analysisResult.getBaselineLayer()}
           >
             Impact Analysis on {analysisResult.getBaselineLayer().legendText}
             <br />
@@ -155,6 +161,7 @@ function LegendItem({
   legendUrl,
   exposure,
   extent,
+  layer,
 }: LegendItemProps) {
   const dispatch = useDispatch();
   const map = useSelector(mapSelector);
@@ -193,15 +200,17 @@ function LegendItem({
       isExposure: true,
     };
 
-    await dispatch(requestAndStoreAnalysis(params));
+    dispatch(requestAndStoreAnalysis(params));
   };
 
   const handleChangeOpacity = (
-    event: React.ChangeEvent<{}>,
+    e: React.ChangeEvent<{}>,
     newValue: number | number[],
   ) => {
     // TODO: temporary solution for opacity adjustment, we hope to edit react-mapbox in the future to support changing props
     // because the whole map will be re-rendered if using state directly
+    e.preventDefault();
+
     if (map) {
       const [layerId, opacityType] = ((
         layerType?: LayerType['type'],
@@ -227,6 +236,105 @@ function LegendItem({
     }
   };
 
+  const legendLayerData = useSelector(layerDataSelector(layer.id)) as
+    | LayerData<LayerType>
+    | undefined;
+
+  const handleLayerDownload = (
+    legendLayer: LayerType,
+    e: React.ChangeEvent<{}>,
+  ): void => {
+    e.preventDefault();
+
+    switch (legendLayer.type) {
+      case 'wms': {
+        const hasGeometry = legendLayer.geometry !== undefined;
+        if (hasGeometry) {
+          const dataUrl = getWFSLayerUrl({
+            layer: legendLayer,
+            extent,
+            date: selectedDate,
+          });
+          fetch(dataUrl)
+            .then(res => res.json())
+            .then(data => {
+              downloadToFile(
+                {
+                  content: JSON.stringify(data),
+                  isUrl: false,
+                },
+                legendLayer.title,
+                'application/json',
+              );
+            })
+            .catch(err => {
+              throw new Error(err);
+            });
+        } else {
+          // Increased the `resolution` and `maxPixel` to high values this will help
+          // to download large image
+          const dataUrl = getWCSLayerUrl({
+            layer: legendLayer,
+            extent,
+            date: selectedDate,
+            resolution: 4096,
+            maxPixel: 20348,
+          });
+          downloadToFile(
+            {
+              content: dataUrl,
+              isUrl: true,
+            },
+            legendLayer.title,
+            'image/tiff',
+          );
+        }
+        break;
+      }
+      case 'nso': {
+        const { data } = (legendLayerData as LayerData<NSOLayerProps>) || {};
+        const { features } = data || {};
+        downloadToFile(
+          {
+            content: JSON.stringify(features),
+            isUrl: false,
+          },
+          legendLayer.title,
+          'application/json',
+        );
+        break;
+      }
+      case 'impact': {
+        const { data } = (legendLayerData as LayerData<ImpactLayerProps>) || {};
+        const { impactFeatures } = data || {};
+        downloadToFile(
+          {
+            content: JSON.stringify(impactFeatures),
+            isUrl: false,
+          },
+          legendLayer.title,
+          'application/json',
+        );
+        break;
+      }
+      case 'point_data': {
+        const { data } =
+          (legendLayerData as LayerData<PointDataLayerProps>) || {};
+        downloadToFile(
+          {
+            content: JSON.stringify(data),
+            isUrl: false,
+          },
+          legendLayer.title,
+          'application/json',
+        );
+        break;
+      }
+      default:
+        throw new Error('Unknown map layer type');
+    }
+  };
+
   return (
     <ListItem disableGutters dense>
       <Paper className={classes.paper}>
@@ -236,7 +344,9 @@ function LegendItem({
               {title}
             </Typography>
           </Grid>
+
           <Divider />
+
           <Grid item className={classes.slider}>
             <Box px={1}>
               <Slider
@@ -249,6 +359,7 @@ function LegendItem({
               />
             </Box>
           </Grid>
+
           {legend && (
             <Grid item>
               {legendUrl ? (
@@ -273,6 +384,20 @@ function LegendItem({
               <Typography variant="h5">{children}</Typography>
             </Grid>
           )}
+
+          <Divider />
+
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={e => handleLayerDownload(layer, e)}
+              fullWidth
+            >
+              Download
+            </Button>
+          </Grid>
 
           {exposure && !analysisResult && (
             <AnalysisButton
@@ -351,6 +476,7 @@ interface LegendItemProps
   opacity: LayerType['opacity'];
   exposure?: LayerKey;
   extent?: Extent;
+  layer: LayerType;
 }
 
 export default withStyles(styles)(Legends);

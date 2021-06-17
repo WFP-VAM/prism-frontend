@@ -46,3 +46,21 @@ export const getFeatureInfoParams = (
 
   return params;
 };
+
+export const downloadToFile = (
+  source: { content: string; isUrl: boolean },
+  filename: string,
+  contentType: string,
+) => {
+  const link = document.createElement('a');
+  const fileType = contentType.split('/')[1];
+
+  link.setAttribute(
+    'href',
+    source.isUrl
+      ? source.content
+      : URL.createObjectURL(new Blob([source.content], { type: contentType })),
+  );
+  link.setAttribute('download', `${filename}.${fileType}`);
+  link.click();
+};
