@@ -181,7 +181,9 @@ function LegendItem({
 
     const params: AnalysisDispatchParams = {
       hazardLayer: LayerDefinitions[exposure as LayerKey] as WMSLayerProps,
-      baselineLayer: LayerDefinitions['inform' as LayerKey] as NSOLayerProps, // TODO: Make analysis without baselineLayer.
+      baselineLayer: LayerDefinitions[
+        'ipc_phase_12_2020' as LayerKey
+      ] as NSOLayerProps, // TODO: Make analysis without baselineLayer.
       date: selectedDate,
       statistic: AggregationOperations.Sum,
       extent,
