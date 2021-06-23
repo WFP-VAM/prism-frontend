@@ -423,7 +423,7 @@
   "lst_day_anomaly_blended": {
     "title": "INAM blended temperature anomaly (10-day)",
     "type": "wms",
-    "server_layer_name": "myd11a2_txd_dekad",
+    "server_layer_name": "myd11a2_blended_txd_dekad",
     "base_url": "https://odc.ovio.org/",
     "date_interval": "days",
     "opacity": 0.7,
