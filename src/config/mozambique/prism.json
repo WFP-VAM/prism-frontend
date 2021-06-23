@@ -14,21 +14,24 @@
   },
   "categories": {
     "hazards": {
-      "CHIRPS_products": [
-        "rfh_dekad",
-        "rnh_dekad",
-        "rnq_dekad",
+      "rainfall": [
+        "precip_blended_dekad",
+        "precip_blended_dekad_anomaly",
+        "rainfall_dekad",
+        "rain_anomaly_dekad",
+        "rain_anomaly_monthly",
+        "rainfall_agg_dekad",
         "days_dry",
-        "dlx_dekad",
-        "xnn_dekad",
-        "xln_dekad"
+        "streak_dry_days",
+        "days_heavy_rain",
+        "streak_heavy_rain"
       ],
-      "disaster_management": [
-        "adamts_buffers",
-        "adamts_nodes",
-        "adamts_tracks",
-        "adam_earthquakes"
-      ]
+      "vegetation_conditions": ["ndvi_dekad_5", "ndvi_dekad_anomaly_5"],
+      "temperature": ["lst_daytime_blended", "lst_day_anomaly_blended", "lst_daytime_5", "lst_day_anomaly_5"],
+      "tropical_storms": ["adamts_buffers"]
+    },
+    "vulnerability": {
+      "food_insecurity": ["ipc_phase_12_2020"]   
     }
   }
 }

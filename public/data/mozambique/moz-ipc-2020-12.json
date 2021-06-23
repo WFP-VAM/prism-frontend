@@ -1,0 +1,803 @@
+{
+    "DataList": 
+    [
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "341,836",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "1,726,170",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Cidade De Pemba",
+        "ADM2_PCODE": "MZ0104",
+        "#": "200,529",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Palma",
+        "ADM2_PCODE": "MZ0116",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Nangade",
+        "ADM2_PCODE": "MZ0115",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Mocimboa Da Praia",
+        "ADM2_PCODE": "MZ0110",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Muidumbe",
+        "ADM2_PCODE": "MZ0113",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Ibo",
+        "ADM2_PCODE": "MZ0105",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Macomia",
+        "ADM2_PCODE": "MZ0106",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Mecufi",
+        "ADM2_PCODE": "MZ0107",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Meluco",
+        "ADM2_PCODE": "MZ0108",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Metuge",
+        "ADM2_PCODE": "MZ0109",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ01",
+        "ADM2_PT": "Quissanga",
+        "ADM2_PCODE": "MZ0118",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Chibuto",
+        "ADM2_PCODE": "MZ0202",
+        "#": "217,155",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Chokwe",
+        "ADM2_PCODE": "MZ0205",
+        "#": "217,019",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Cidade De Xai-Xai",
+        "ADM2_PCODE": "MZ0207",
+        "#": "141,963",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "146,120",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Chicualacuala",
+        "ADM2_PCODE": "MZ0203",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Chigubo",
+        "ADM2_PCODE": "MZ0204",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Mabalane",
+        "ADM2_PCODE": "MZ0210",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Massangena",
+        "ADM2_PCODE": "MZ0213",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Massingir",
+        "ADM2_PCODE": "MZ0214",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Mapai",
+        "ADM2_PCODE": "MZ0212",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Guija",
+        "ADM2_PCODE": "MZ0208",
+        "#": "92,225",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ02",
+        "ADM2_PT": "Mandlakaze",
+        "ADM2_PCODE": "MZ0211",
+        "#": "137,068",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0301",
+        "#": "82,119",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": " ",
+        "ADM2_PCODE": "MZ0310",
+        "#": "129,993",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0309",
+        "#": "236,939",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0312",
+        "#": "43,968",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "824,805",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Funhalouro",
+        "ADM2_PCODE": "MZ0302",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Govuro",
+        "ADM2_PCODE": "MZ0303",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Homoine",
+        "ADM2_PCODE": "MZ0304",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Inharrime",
+        "ADM2_PCODE": "MZ0305",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Inhassoro",
+        "ADM2_PCODE": "MZ0306",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Jangamo",
+        "ADM2_PCODE": "MZ0307",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Mabote",
+        "ADM2_PCODE": "MZ0308",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Vilankulo",
+        "ADM2_PCODE": "MZ0313",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ03",
+        "ADM2_PT": "Zavala",
+        "ADM2_PCODE": "MZ0314",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Cidade De Chimoio",
+        "ADM2_PCODE": "MZ0402",
+        "#": "363,336",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "1,488,595",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Barue",
+        "ADM2_PCODE": "MZ0401",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Gondola",
+        "ADM2_PCODE": "MZ0403",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Guro",
+        "ADM2_PCODE": "MZ0404",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Macate",
+        "ADM2_PCODE": "MZ0405",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Machaze",
+        "ADM2_PCODE": "MZ0406",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Macossa",
+        "ADM2_PCODE": "MZ0407",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Manica",
+        "ADM2_PCODE": "MZ0408",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Mossurize",
+        "ADM2_PCODE": "MZ0409",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Sussundenga",
+        "ADM2_PCODE": "MZ0410",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Tambara",
+        "ADM2_PCODE": "MZ0411",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ04",
+        "ADM2_PT": "Vanduzi",
+        "ADM2_PCODE": "MZ0412",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0502",
+        "#": "1,032,197",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0503",
+        "#": "62,297",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "813,584",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "Boane",
+        "ADM2_PCODE": "MZ0501",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "Manhi√ßa",
+        "ADM2_PCODE": "MZ0504",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "Marracuene",
+        "ADM2_PCODE": "MZ0505",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "Matutuine",
+        "ADM2_PCODE": "MZ0506",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "Moamba",
+        "ADM2_PCODE": "MZ0507",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ05",
+        "ADM2_PT": "Namaacha",
+        "ADM2_PCODE": "MZ0508",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ06",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0601",
+        "#": "1,080,277",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ07",
+        "ADM2_PT": "Cidade De Nampula",
+        "ADM2_PCODE": "MZ0702",
+        "#": "760,214",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ07",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "1,076,456",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ07",
+        "ADM2_PT": "Memba",
+        "ADM2_PCODE": "MZ0711",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ07",
+        "ADM2_PT": "Mogincual",
+        "ADM2_PCODE": "MZ0712",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ07",
+        "ADM2_PT": "Monapo",
+        "ADM2_PCODE": "MZ0715",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ07",
+        "ADM2_PT": "Muecate",
+        "ADM2_PCODE": "MZ0717",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ07",
+        "ADM2_PT": "Nacala-A-Velha",
+        "ADM2_PCODE": "MZ0720",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ08",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0802",
+        "#": "242,204",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ08",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "867,332",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ08",
+        "ADM2_PT": "Chimbonila",
+        "ADM2_PCODE": "MZ0801",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ08",
+        "ADM2_PT": "Mandimba",
+        "ADM2_PCODE": "MZ0809",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ08",
+        "ADM2_PT": "Mecanhelas",
+        "ADM2_PCODE": "MZ0813",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ08",
+        "ADM2_PT": "Cuamba",
+        "ADM2_PCODE": "MZ0803",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ08",
+        "ADM2_PT": "Metarica",
+        "ADM2_PCODE": "MZ0815",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0901",
+        "#": "177,415",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0906",
+        "#": "592,090",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0907",
+        "#": "193,382",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ0913",
+        "#": "279,081",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "954,877",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Caia",
+        "ADM2_PCODE": "MZ0902",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Chemba",
+        "ADM2_PCODE": "MZ0903",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Cheringoma",
+        "ADM2_PCODE": "MZ0904",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Chibabava",
+        "ADM2_PCODE": "MZ0905",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Gorongosa",
+        "ADM2_PCODE": "MZ0908",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Machanga",
+        "ADM2_PCODE": "MZ0909",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Maringue",
+        "ADM2_PCODE": "MZ0910",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Marromeu",
+        "ADM2_PCODE": "MZ0911",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ09",
+        "ADM2_PT": "Muanza",
+        "ADM2_PCODE": "MZ0912",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ10",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "MZ1006",
+        "#": "307,338",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ10",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "1,031,460",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ10",
+        "ADM2_PT": "Chiuta",
+        "ADM2_PCODE": "MZ1005",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ10",
+        "ADM2_PT": "Marara",
+        "ADM2_PCODE": "MZ1010",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ10",
+        "ADM2_PT": "Cahora Bassa",
+        "ADM2_PCODE": "MZ1002",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ10",
+        "ADM2_PT": "Magoe",
+        "ADM2_PCODE": "MZ1009",
+        "#": "",
+        "overall_phase": 3
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Cidade De Quelimane",
+        "ADM2_PCODE": "MZ1103",
+        "#": "349,842",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "",
+        "ADM2_PCODE": "",
+        "#": "1,933,183",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Alto Molocue",
+        "ADM2_PCODE": "MZ1101",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Chinde",
+        "ADM2_PCODE": "MZ1102",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Gile",
+        "ADM2_PCODE": "MZ1105",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Gurue",
+        "ADM2_PCODE": "MZ1106",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Ile",
+        "ADM2_PCODE": "MZ1107",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Lugela",
+        "ADM2_PCODE": "MZ1110",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Maganja Da Costa",
+        "ADM2_PCODE": "MZ1111",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Milange",
+        "ADM2_PCODE": "MZ1113",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Mocuba",
+        "ADM2_PCODE": "MZ1114",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Mocubela",
+        "ADM2_PCODE": "MZ1115",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Molumbo",
+        "ADM2_PCODE": "MZ1116",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Morrumbala",
+        "ADM2_PCODE": "MZ1118",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Mulevala",
+        "ADM2_PCODE": "MZ1119",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Namacurra",
+        "ADM2_PCODE": "MZ1120",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Namarroi",
+        "ADM2_PCODE": "MZ1121",
+        "#": "",
+        "overall_phase": 2
+      },
+      {
+        "ADM1_PCODE": "MZ11",
+        "ADM2_PT": "Pebane",
+        "ADM2_PCODE": "MZ1123",
+        "#": "",
+        "overall_phase": 2
+      }
+     ]
+}
