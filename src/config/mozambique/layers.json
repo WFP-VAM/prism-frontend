@@ -528,10 +528,6 @@
       "timestamp": {
         "type": "date",
         "label": "Publication date"
-      },
-      "wcsConfig": {
-        "scale": 0.1,
-        "offset": 0
       }
     },
     "exposure": "wp_pop_cicunadj",
