@@ -25,7 +25,7 @@
       ],
       "vegetation_conditions": ["ndvi_dekad", "ndvi_dekad_anomaly"],
       "temperature": ["lst_daytime", "lst_anomaly", "lst_amplitude"],
-      "earthquakes": ["adam_earthquakes"]
+      "earthquakes": ["usgs_shakemaps"]
     }
   }
 }

@@ -16,6 +16,7 @@
     "hazards": {
       "tropical_storms": ["adamts_buffers"],
       "floods": ["hydra_s1"],
+      "earthquakes": ["usgs_shakemaps"],
       "rainfall": [
         "rainfall_dekad",
         "rain_anomaly_dekad",

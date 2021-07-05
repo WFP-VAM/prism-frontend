@@ -1123,5 +1123,23 @@
     "legend": [],
     "legend_text": "",
     "base_url": "https://geonode.wfp.org/geoserver"
+  },
+  "usgs_shakemaps": {
+    "title": "Earthquakes shakemaps",
+    "type": "wms",
+    "server_layer_name": "mmr_usgs_shakemaps",
+    "opacity": 0.5,
+    "legend": [],
+    "legend_text": "Shakemaps",
+    "base_url": "https://geonode.wfp.org/geoserver",
+    "group": {
+      "name": "Earthquakes",
+      "main": true
+    },
+    "exposure": {
+      "id": "wp_pop_cicunadj",
+      "key": "mmi"
+    },
+    "geometry": "polygon"
   }
 }
