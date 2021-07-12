@@ -643,6 +643,34 @@
           "color": "#fdae61"
         }
       ]
+    },
+  "wp_pop_cicunadj": {
+    "title": "population",
+    "type": "wms",
+    "wcsConfig": {
+      "time_support": false,
+      "version": "2.0.0",
+      "scale": "0.1"
+    },
+    "server_layer_name": "wp_pop_cicunadj",
+    "base_url": "https://odc.ovio.org/",
+    "opacity": 0,
+    "legend_text": "",
+    "legend": []
+  }, 
+  "usgs_shakemaps": {
+    "title": "shakemaps",
+    "type": "wms",
+    "server_layer_name": "kgz_usgs_shakemaps",
+    "opacity": 0.5,
+    "legend": [],
+    "legend_text": "Shakemaps",
+    "base_url": "https://geonode.wfp.org/geoserver",
+    "geometry": "polygon",
+    "exposure": {
+      "id": "wp_pop_cicunadj",
+      "key": "mmi"
     }
+  }
 }
 

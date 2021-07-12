@@ -26,7 +26,8 @@
       ],
       "vegetation_conditions": ["pasture_anomaly","10day_NDVI_KDC","ndvi_dekad", "ndvi_dekad_anomaly","ModisVHI"],
       "temperature": ["lst_daytime", "lst_anomaly", "lst_amplitude"],
-      "snow_conditions": ["snow_cover", "modis_snow_percentage"]
+      "snow_conditions": ["snow_cover", "modis_snow_percentage"],
+      "earthquakes": ["usgs_shakemaps"]
     },
     "risk": {
       "recurrence_of_hazards":[
