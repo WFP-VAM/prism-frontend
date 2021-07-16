@@ -14,6 +14,7 @@ import {
   WfsRequestParams,
   LayerKey,
   ExposedPopulationDefinition,
+  TableType,
 } from '../config/types';
 import {
   BaselineLayerResult,
@@ -40,11 +41,20 @@ import { isLocalhost } from '../serviceWorker';
 
 const ANALYSIS_API_URL = 'https://prism-api.ovio.org/stats'; // TODO both needs to be stored somewhere
 
+export type TableRowType = { [key: string]: string | number };
+export type TableData = {
+  columns: string[];
+  rows: TableRowType[];
+};
+
 type AnalysisResultState = {
+  definition?: TableType;
+  tableData?: TableData;
   result?: AnalysisResult;
   error?: string;
   isLoading: boolean;
   isMapLayerActive: boolean;
+  isDataTableDrawerActive: boolean;
   isExposureLoading: boolean;
 };
 
@@ -58,6 +68,7 @@ export type TableRow = {
 const initialState: AnalysisResultState = {
   isLoading: false,
   isMapLayerActive: true,
+  isDataTableDrawerActive: false,
   isExposureLoading: false,
 };
 
@@ -109,6 +120,7 @@ function generateTableFromApiData(
     // find feature (a cell on the map) from admin boundaries json that closely matches this api row.
     // we decide it matches if the feature json has the same name as the name for this row.
     // once we find it we can get the corresponding local name.
+
     const featureBoundary = adminLayerData.features.find(
       feature => feature.properties?.[adminLevelName] === row[adminLevelName],
     );
@@ -241,8 +253,15 @@ export const requestAndStoreExposedPopulation = createAsyncThunk<
   };
 
   const legend = createLegendFromFeatureArray(features, statistic);
+  const legendText = wfsLayer.title;
 
-  return new ExposedPopulationResult(collection, statistic, legend, key);
+  return new ExposedPopulationResult(
+    collection,
+    statistic,
+    legend,
+    legendText,
+    key,
+  );
 });
 
 export const requestAndStoreAnalysis = createAsyncThunk<
@@ -340,9 +359,31 @@ export const analysisResultSlice = createSlice({
   name: 'analysisResultState',
   initialState,
   reducers: {
+    addTableData: (state, { payload }: PayloadAction<TableData>) => ({
+      ...state,
+      tableData: payload,
+    }),
     setIsMapLayerActive: (state, { payload }: PayloadAction<boolean>) => ({
       ...state,
       isMapLayerActive: payload,
+    }),
+    setIsDataTableDrawerActive: (
+      state,
+      { payload }: PayloadAction<boolean>,
+    ) => ({
+      ...state,
+      isDataTableDrawerActive: payload,
+    }),
+    setCurrentDataDefinition: (
+      state,
+      { payload }: PayloadAction<TableType>,
+    ) => ({
+      ...state,
+      definition: payload,
+    }),
+    hideDataTableDrawer: state => ({
+      ...state,
+      isDataTableDrawerActive: false,
     }),
     clearAnalysisResult: state => ({
       ...state,
@@ -415,6 +456,12 @@ export const analysisResultSlice = createSlice({
 });
 
 // Getters
+export const getCurrentDefinition = (state: RootState): TableType | undefined =>
+  state.analysisResultState.definition;
+
+export const getCurrentData = (state: RootState): TableData =>
+  state.analysisResultState.tableData || { columns: [], rows: [] };
+
 export const analysisResultSelector = (
   state: RootState,
 ): AnalysisResult | undefined => state.analysisResultState.result;
@@ -428,9 +475,16 @@ export const isExposureAnalysisLoadingSelector = (state: RootState): boolean =>
 export const isAnalysisLayerActiveSelector = (state: RootState): boolean =>
   state.analysisResultState.isMapLayerActive;
 
+export const isDataTableDrawerActiveSelector = (state: RootState): boolean =>
+  state.analysisResultState.isDataTableDrawerActive;
+
 // Setters
 export const {
+  addTableData,
   setIsMapLayerActive,
+  setIsDataTableDrawerActive,
+  setCurrentDataDefinition,
+  hideDataTableDrawer,
   clearAnalysisResult,
 } = analysisResultSlice.actions;
 

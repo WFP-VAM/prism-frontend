@@ -9,18 +9,27 @@ import {
 } from '@material-ui/core';
 import DataTable from './DataTable';
 import { getIsShowing, hideTable } from '../../context/tableStateSlice';
+import {
+  isDataTableDrawerActiveSelector,
+  hideDataTableDrawer,
+} from '../../context/analysisResultStateSlice';
 
 function DataDrawer({ classes }: DataDrawerProps) {
   const tableIsShowing = useSelector(getIsShowing);
+  const analysisTableIsShowing = useSelector(isDataTableDrawerActiveSelector);
+  const isShowing = tableIsShowing || analysisTableIsShowing;
+
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(hideTable());
+    dispatch(hideDataTableDrawer());
   };
 
   return (
-    <Drawer anchor="left" open={tableIsShowing} onClose={handleClose}>
+    <Drawer anchor="left" open={isShowing} onClose={handleClose}>
       <div className={classes.drawerContent}>
-        <DataTable maxResults={1000} />
+        {tableIsShowing ||
+          (analysisTableIsShowing && <DataTable maxResults={1000} />)}
       </div>
     </Drawer>
   );

@@ -11,14 +11,21 @@ import {
   CircularProgress,
   Paper,
   Box,
+  Button,
 } from '@material-ui/core';
 import {
-  getCurrentDefinition,
+  getCurrentDefinition as getTableDefinition,
   isLoading,
-  getCurrentData,
+  getCurrentData as getTableData,
 } from '../../../context/tableStateSlice';
+import {
+  getCurrentDefinition as getAnalysisDefinition,
+  isExposureAnalysisLoadingSelector,
+  getCurrentData as getAnalysisData,
+} from '../../../context/analysisResultStateSlice';
 import Chart from '../Chart';
 import DataTableRow from './DataTableRow';
+import { exportDataTableToCSV, downloadToFile } from '../../MapView/utils';
 
 const styles = () =>
   createStyles({
@@ -44,23 +51,55 @@ export interface DataTableProps extends WithStyles<typeof styles> {
 }
 
 const DataTable = ({ classes, maxResults }: DataTableProps) => {
-  const loading = useSelector(isLoading);
-  const definition = useSelector(getCurrentDefinition);
-  const data = useSelector(getCurrentData);
+  const tableLoading = useSelector(isLoading);
+  const analysisLoading = useSelector(isExposureAnalysisLoadingSelector);
+  const loading = tableLoading || analysisLoading;
+  const tableDefinition = useSelector(getTableDefinition);
+  const analysisDefinition = useSelector(getAnalysisDefinition);
+  const definition = tableDefinition || analysisDefinition;
+  const tableData = useSelector(getTableData);
+  const analysisData = useSelector(getAnalysisData);
+  const data = tableData.rows.length !== 0 ? tableData : analysisData;
 
   if (!definition) {
     return null;
   }
 
   const { table, title, legendText, chart } = definition;
+  const csvData = exportDataTableToCSV(analysisData);
+
+  const handleDownload = (payload: string, e: React.ChangeEvent<{}>) => {
+    e.preventDefault();
+    downloadToFile(
+      {
+        content: payload,
+        isUrl: false,
+      },
+      title,
+      'text/csv',
+    );
+  };
 
   return (
     <div>
       <h2>{title}</h2>
       <p>{legendText}</p>
-      <p>
-        <a href={process.env.PUBLIC_URL + table}>Download as CSV</a>
-      </p>
+
+      {table && (
+        <p>
+          <Button>
+            <a href={process.env.PUBLIC_URL + table}>Download as CSV</a>
+          </Button>
+        </p>
+      )}
+
+      {csvData && (
+        <p>
+          <Button onClick={e => handleDownload(csvData, e)}>
+            Download as CSV
+          </Button>
+        </p>
+      )}
 
       {!loading && chart && <Chart title={title} config={chart} data={data} />}
 

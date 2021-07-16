@@ -542,10 +542,11 @@ export class ExposedPopulationResult {
   key: string;
   featureCollection: FeatureCollection;
   legend: LegendDefinition;
+  legendText: string;
   statistic: AggregationOperations;
 
   getTitle = (): string => {
-    return 'Population Affected';
+    return 'Population Exposure';
   };
 
   getStatTitle = (): string => {
@@ -556,11 +557,13 @@ export class ExposedPopulationResult {
     featureCollection: FeatureCollection,
     statistic: AggregationOperations,
     legend: LegendDefinition,
+    legendText: string,
     key: string,
   ) {
     this.featureCollection = featureCollection;
     this.statistic = statistic;
     this.legend = legend;
+    this.legendText = legendText;
     this.key = key;
   }
 }
@@ -577,6 +580,7 @@ export class BaselineLayerResult {
   threshold: ThresholdDefinition;
 
   legend: LegendDefinition;
+  legendText: string;
   hazardLayerId: WMSLayerProps['id'];
   baselineLayerId: NSOLayerProps['id'];
 
@@ -594,6 +598,7 @@ export class BaselineLayerResult {
     this.statistic = statistic;
     this.threshold = threshold;
     this.legend = baselineLayer.legend;
+    this.legendText = hazardLayer.legendText;
     this.rawApiData = rawApiData;
 
     this.hazardLayerId = hazardLayer.id;

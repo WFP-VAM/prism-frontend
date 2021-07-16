@@ -8,6 +8,8 @@ import {
   Switch,
   FormGroup,
   FormControlLabel,
+  Grid,
+  Typography,
 } from '@material-ui/core';
 import {
   ExposedPopulationResult,
@@ -15,12 +17,14 @@ import {
 } from '../../../utils/analysis-utils';
 import { dateRangeSelector } from '../../../context/mapStateSlice/selectors';
 import {
-  isAnalysisLayerActiveSelector,
+  isDataTableDrawerActiveSelector,
   ExposedPopulationDispatchParams,
   requestAndStoreExposedPopulation,
   isExposureAnalysisLoadingSelector,
   clearAnalysisResult,
-  setIsMapLayerActive,
+  setIsDataTableDrawerActive,
+  setCurrentDataDefinition,
+  analysisResultSelector,
 } from '../../../context/analysisResultStateSlice';
 import {
   LayerType,
@@ -28,7 +32,7 @@ import {
   LayerKey,
   ExposedPopulationDefinition,
 } from '../../../config/types';
-
+import { TableDefinitions } from '../../../config/utils';
 import { Extent } from '../Layers/raster-utils';
 
 const AnalysisButton = withStyles(() => ({
@@ -52,8 +56,7 @@ const ExposedPopulationAnalysis = ({
   exposure,
 }: AnalysisProps) => {
   const { startDate: selectedDate } = useSelector(dateRangeSelector);
-  const isMapLayerActive = useSelector(isAnalysisLayerActiveSelector);
-
+  const isDataTableDrawerActive = useSelector(isDataTableDrawerActiveSelector);
   const analysisExposureLoading = useSelector(
     isExposureAnalysisLoadingSelector,
   );
@@ -80,20 +83,49 @@ const ExposedPopulationAnalysis = ({
     await dispatch(requestAndStoreExposedPopulation(params));
   };
 
-  const ResultSwitches = () => (
-    <FormGroup>
-      <AnalysisFormControlLabel
-        control={
-          <Switch
-            color="primary"
-            checked={isMapLayerActive}
-            onChange={e => dispatch(setIsMapLayerActive(e.target.checked))}
+  const ResultSwitches = () => {
+    const data = useSelector(analysisResultSelector);
+    const features = data?.featureCollection.features;
+    const hasData = features?.length === 0 || false;
+
+    const handleTableViewChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(setIsDataTableDrawerActive(e.target.checked));
+      dispatch(
+        setCurrentDataDefinition({
+          id: TableDefinitions.animal_deaths.id,
+          title: data?.getTitle() as string,
+          table: '',
+          legendText: data?.legendText as string,
+        }),
+      );
+    };
+
+    return (
+      <>
+        <FormGroup>
+          <AnalysisFormControlLabel
+            control={
+              <Switch
+                color="primary"
+                disabled={hasData}
+                checked={isDataTableDrawerActive}
+                onChange={handleTableViewChange}
+              />
+            }
+            label="Table view"
           />
-        }
-        label="Map View"
-      />
-    </FormGroup>
-  );
+        </FormGroup>
+
+        {hasData && (
+          <Grid item>
+            <Typography align="center" variant="h5">
+              No population was exposed
+            </Typography>
+          </Grid>
+        )}
+      </>
+    );
+  };
 
   if (!result || result instanceof BaselineLayerResult) {
     return (

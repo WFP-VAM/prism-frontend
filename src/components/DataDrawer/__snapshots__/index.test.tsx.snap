@@ -8,11 +8,7 @@ exports[`renders as expected 1`] = `
   >
     <div
       class="DataDrawer-drawerContent-1"
-    >
-      <data-table
-        maxresults="1000"
-      />
-    </div>
+    />
   </mock-drawer>
 </div>
 `;
